@@ -2,7 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Diagnóstico Capilar Avançado - Doutor Jean</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Diagnóstico Capilar - Doutor Jean</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,133 +12,147 @@
             --accent: #FF6B6B;
         }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #f0f4f8;
             min-height: 100vh;
-            padding: 20px;
-            margin: 0;
+            padding: 15px;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .container {
             max-width: 800px;
-            margin: 40px auto;
+            margin: 20px auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 30px;
-        }
-
-        .question {
-            display: none;
-            padding: 25px;
             border-radius: 15px;
-            background: #fff;
-            margin: 20px 0;
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
-        .active {
-            display: block;
-            animation: slideIn 0.5s ease;
-        }
-
-        h3 {
-            color: var(--primary);
-            margin-bottom: 25px;
-            font-size: 1.4em;
-        }
-
-        .option {
-            display: block;
-            width: 100%;
-            padding: 15px 25px;
-            margin: 10px 0;
-            border: 2px solid #eee;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-            font-size: 1em;
-            background: #f8f9fa;
-        }
-
-        .option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-color: var(--secondary);
-        }
-
+        /* Progress Bar */
         #progress {
-            width: 100%;
-            height: 8px;
-            background: #eee;
-            border-radius: 4px;
-            margin: 20px 0;
+            height: 6px;
+            background: #e0e0e0;
         }
 
         #progressBar {
             height: 100%;
             width: 0;
             background: var(--secondary);
-            border-radius: 4px;
-            transition: width 0.5s ease;
+            transition: width 0.3s ease;
         }
 
+        /* Questions */
+        .question {
+            display: none;
+            padding: 20px;
+        }
+
+        .question.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: #f8f9fa;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .option:hover,
+        .option:focus {
+            transform: translateY(-2px);
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        /* Result Section */
         #result {
             display: none;
+            padding: 25px;
             text-align: center;
-            padding: 30px;
         }
 
         .result-card {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 20px 0;
-            box-shadow: 0 10px 20px rgba(42,84,112,0.2);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 15px 0;
         }
 
         #whatsappBtn {
             background: #25D366;
             color: white;
-            padding: 18px 35px;
+            width: calc(100% - 40px);
+            padding: 16px;
             border: none;
-            border-radius: 50px;
+            border-radius: 25px;
+            font-size: 1.1rem;
             cursor: pointer;
-            font-size: 1.1em;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-
-        #whatsappBtn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(37,211,102,0.3);
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .severity-bar {
-            width: 80%;
-            height: 12px;
-            background: #eee;
-            border-radius: 6px;
             margin: 20px auto;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.2s ease;
         }
 
-        .severity-indicator {
-            height: 100%;
-            border-radius: 6px;
-            background: linear-gradient(90deg, #25D366, #FF6B6B);
-            transition: width 1s ease;
+        #whatsappBtn:active {
+            transform: scale(0.98);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                margin: 10px auto;
+                border-radius: 12px;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .option {
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+
+            #whatsappBtn {
+                width: 90%;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -150,7 +165,7 @@
 
             <!-- Pergunta 1 -->
             <div class="question active">
-                <h3>📅 Há quanto tempo você percebeu a queda capilar?</h3>
+                <h3>📅 Há quanto tempo percebeu a queda capilar?</h3>
                 <button class="option" onclick="nextQuestion(1)">Menos de 6 meses 🕒</button>
                 <button class="option" onclick="nextQuestion(2)">6 meses a 1 ano 📆</button>
                 <button class="option" onclick="nextQuestion(3)">Mais de 1 ano 📅</button>
@@ -158,7 +173,7 @@
 
             <!-- Pergunta 2 -->
             <div class="question">
-                <h3>💧 Qual o nível de oleosidade do seu couro cabeludo?</h3>
+                <h3>💧 Nível de oleosidade do couro cabeludo?</h3>
                 <button class="option" onclick="nextQuestion(1)">Normal/Seco 🌵</button>
                 <button class="option" onclick="nextQuestion(2)">Levemente oleoso 🌊</button>
                 <button class="option" onclick="nextQuestion(3)">Muito oleoso 🔥</button>
@@ -174,15 +189,15 @@
 
             <!-- Pergunta 4 -->
             <div class="question">
-                <h3>🔍 Estado atual dos folículos capilares</h3>
-                <button class="option" onclick="nextQuestion(1)">Ainda bem definidos ✅</button>
+                <h3>🔍 Estado dos folículos capilares?</h3>
+                <button class="option" onclick="nextQuestion(1)">Bem definidos ✅</button>
                 <button class="option" onclick="nextQuestion(2)">Alguns afinados ⚠️</button>
-                <button class="option" onclick="nextQuestion(3)">Muitos miniaturizados ❌</button>
+                <button class="option" onclick="nextQuestion(3)">Miniaturizados ❌</button>
             </div>
 
             <!-- Pergunta 5 -->
             <div class="question">
-                <h3>💤 Qual a qualidade do seu sono?</h3>
+                <h3>💤 Qualidade do sono?</h3>
                 <button class="option" onclick="nextQuestion(1)">Ótima 😴</button>
                 <button class="option" onclick="nextQuestion(2)">Regular 🛌</button>
                 <button class="option" onclick="nextQuestion(3)">Ruim 😫</button>
@@ -190,10 +205,10 @@
 
             <!-- Pergunta 6 -->
             <div class="question">
-                <h3>🧪 Já usou algum tratamento anteriormente?</h3>
-                <button class="option" onclick="nextQuestion(1)">Sim, com sucesso 👍</button>
+                <h3>🧪 Resultado de tratamentos anteriores?</h3>
+                <button class="option" onclick="nextQuestion(1)">Bom resultado 👍</button>
                 <button class="option" onclick="nextQuestion(2)">Pouco resultado 🤷</button>
-                <button class="option" onclick="nextQuestion(3)">Nenhum resultado 👎</button>
+                <button class="option" onclick="nextQuestion(3)">Sem resultado 👎</button>
             </div>
 
             <!-- Pergunta 7 -->
@@ -208,21 +223,23 @@
         <div id="result">
             <div class="result-card">
                 <h2>🔬 Diagnóstico Completo</h2>
-                <div class="severity-bar">
-                    <div class="severity-indicator" id="severityIndicator"></div>
-                </div>
-                <p id="diagnosisText"></p>
-                <p id="treatmentText"></p>
+                <p id="diagnosisText" style="margin: 15px 0;"></p>
+                <p id="treatmentText" style="font-weight: 500;"></p>
             </div>
-            <button id="whatsappBtn">📩 Enviar Relatório ao Doutor Jean</button>
+            <button id="whatsappBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/>
+                </svg>
+                Enviar para Dr. Jean
+            </button>
         </div>
     </div>
 
     <script>
+        // Configuração do Quiz
         let currentQuestion = 0;
         let score = 0;
-        const totalQuestions = 7;
-        const questions = document.querySelectorAll('.question');
+        const totalQuestions = document.querySelectorAll('.question').length;
 
         function updateProgress() {
             const progress = ((currentQuestion + 1) / totalQuestions) * 100;
@@ -230,12 +247,12 @@
         }
 
         function nextQuestion(value) {
-            score += value;
-            questions[currentQuestion].classList.remove('active');
+            score += parseInt(value);
+            document.querySelector('.question.active').classList.remove('active');
             currentQuestion++;
-            
+
             if(currentQuestion < totalQuestions) {
-                questions[currentQuestion].classList.add('active');
+                document.querySelectorAll('.question')[currentQuestion].classList.add('active');
                 updateProgress();
             } else {
                 showResult();
@@ -244,47 +261,39 @@
 
         function showResult() {
             document.getElementById('quiz').style.display = 'none';
-            const resultDiv = document.getElementById('result');
-            resultDiv.style.display = 'block';
+            document.getElementById('result').style.display = 'block';
 
-            let treatment = '';
-            let severity = '';
-            let severityWidth = '33%';
-
+            let treatment, severity;
             if(score <= 7) {
                 treatment = "Plano de 3 Meses: Terapia Preventiva";
                 severity = "Leve";
-                severityWidth = '33%';
             } else if(score <= 14) {
                 treatment = "Plano de 4 Meses: Tratamento Intensivo";
                 severity = "Moderado";
-                severityWidth = '66%';
             } else {
                 treatment = "Plano de 5 Meses: Protocolo Avançado";
                 severity = "Avançado";
-                severityWidth = '100%';
             }
 
-            document.getElementById('severityIndicator').style.width = severityWidth;
             document.getElementById('diagnosisText').innerHTML = `
-                ⚖️ Nível de Severidade: ${severity}<br>
-                📊 Pontuação Total: ${score}/21
+                ⚖️ Nível: <strong>${severity}</strong><br>
+                📊 Pontuação: <strong>${score}/21</strong>
             `;
-            
-            document.getElementById('treatmentText').innerHTML = `
-                💡 Recomendação:<br>
-                <strong>${treatment}</strong><br>
-                ${severity === 'Avançado' ? '⚠️ Necessário acompanhamento especializado imediato' : '✅ Prognóstico positivo com tratamento adequado'}
-            `;
+
+            document.getElementById('treatmentText').textContent = treatment;
 
             // Configurar WhatsApp
-            const whatsappBtn = document.getElementById('whatsappBtn');
-            const message = `*Relatório Capilar*%0A%0A🔍 Nível: ${severity}%0A📈 Pontuação: ${score}/21%0A💊 Tratamento: ${treatment}%0A%0A🧑⚕️ Doutor Jean%0A📞 (31) 7510-5402`;
-            
-            whatsappBtn.onclick = () => {
-                window.open(`https://wa.me/553175105402?text=${message}`, '_blank');
+            const message = `*Relatório Capilar*%0A%0A🔍 Nível: ${severity}%0A📈 Pontuação: ${score}/21%0A💊 Tratamento: ${treatment}%0A%0A_Enviado via Site de Diagnóstico_`;
+            document.getElementById('whatsappBtn').onclick = () => {
+                window.open(`https://wa.me/553175105402?text=${encodeURIComponent(message)}`, '_blank');
             }
         }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Garante que a primeira pergunta está ativa
+            document.querySelector('.question').classList.add('active');
+        });
     </script>
 </body>
 </html>
