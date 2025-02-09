@@ -35,7 +35,6 @@
             overflow: hidden;
         }
 
-        /* Progress Bar */
         #progress {
             height: 6px;
             background: #e0e0e0;
@@ -48,7 +47,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Questions */
         .question {
             display: none;
             padding: 20px;
@@ -89,7 +87,6 @@
             outline: none;
         }
 
-        /* Result Section */
         #result {
             display: none;
             padding: 25px;
@@ -125,26 +122,21 @@
             transform: scale(0.98);
         }
 
-        /* Mobile Optimization */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
             }
-
             .container {
                 margin: 10px auto;
                 border-radius: 12px;
             }
-
             h3 {
                 font-size: 1.1rem;
             }
-
             .option {
                 padding: 12px;
                 font-size: 0.95rem;
             }
-
             #whatsappBtn {
                 width: 90%;
             }
@@ -163,7 +155,7 @@
                 <div id="progressBar"></div>
             </div>
 
-            <!-- Pergunta 1 -->
+            <!-- Perguntas -->
             <div class="question active">
                 <h3>📅 Há quanto tempo percebeu a queda capilar?</h3>
                 <button class="option" onclick="nextQuestion(1)">Menos de 6 meses 🕒</button>
@@ -171,7 +163,6 @@
                 <button class="option" onclick="nextQuestion(3)">Mais de 1 ano 📅</button>
             </div>
 
-            <!-- Pergunta 2 -->
             <div class="question">
                 <h3>💧 Nível de oleosidade do couro cabeludo?</h3>
                 <button class="option" onclick="nextQuestion(1)">Normal/Seco 🌵</button>
@@ -179,7 +170,6 @@
                 <button class="option" onclick="nextQuestion(3)">Muito oleoso 🔥</button>
             </div>
 
-            <!-- Pergunta 3 -->
             <div class="question">
                 <h3>👨🦲 Histórico familiar de calvície?</h3>
                 <button class="option" onclick="nextQuestion(1)">Nenhum parente 🚫</button>
@@ -187,7 +177,6 @@
                 <button class="option" onclick="nextQuestion(3)">Vários parentes 👨👩👦👦</button>
             </div>
 
-            <!-- Pergunta 4 -->
             <div class="question">
                 <h3>🔍 Estado dos folículos capilares?</h3>
                 <button class="option" onclick="nextQuestion(1)">Bem definidos ✅</button>
@@ -195,7 +184,6 @@
                 <button class="option" onclick="nextQuestion(3)">Miniaturizados ❌</button>
             </div>
 
-            <!-- Pergunta 5 -->
             <div class="question">
                 <h3>💤 Qualidade do sono?</h3>
                 <button class="option" onclick="nextQuestion(1)">Ótima 😴</button>
@@ -203,7 +191,6 @@
                 <button class="option" onclick="nextQuestion(3)">Ruim 😫</button>
             </div>
 
-            <!-- Pergunta 6 -->
             <div class="question">
                 <h3>🧪 Resultado de tratamentos anteriores?</h3>
                 <button class="option" onclick="nextQuestion(1)">Bom resultado 👍</button>
@@ -211,7 +198,6 @@
                 <button class="option" onclick="nextQuestion(3)">Sem resultado 👎</button>
             </div>
 
-            <!-- Pergunta 7 -->
             <div class="question">
                 <h3>🧠 Nível de estresse diário?</h3>
                 <button class="option" onclick="nextQuestion(1)">Controlado 🧘</button>
@@ -236,7 +222,6 @@
     </div>
 
     <script>
-        // Configuração do Quiz
         let currentQuestion = 0;
         let score = 0;
         const totalQuestions = document.querySelectorAll('.question').length;
@@ -282,16 +267,19 @@
 
             document.getElementById('treatmentText').textContent = treatment;
 
-            // Configurar WhatsApp
-            const message = `*Relatório Capilar*%0A%0A🔍 Nível: ${severity}%0A📈 Pontuação: ${score}/21%0A💊 Tratamento: ${treatment}%0A%0A_Enviado via Site de Diagnóstico_`;
+            // Configuração do WhatsApp
+            const message = `*Relatório Capilar*
+            
+🔍 *Nível:* ${severity}
+📈 *Pontuação:* ${score}/21
+💊 *Tratamento:* ${treatment}`;
+
             document.getElementById('whatsappBtn').onclick = () => {
                 window.open(`https://wa.me/553175105402?text=${encodeURIComponent(message)}`, '_blank');
             }
         }
 
-        // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
-            // Garante que a primeira pergunta está ativa
             document.querySelector('.question').classList.add('active');
         });
     </script>
