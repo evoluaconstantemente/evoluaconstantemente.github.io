@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnóstico Capilar Avançado - Doutor Jean</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2A5470;
+            --secondary: #4C8BA8;
+            --accent: #FF6B6B;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .question {
+            display: none;
+            padding: 25px;
+            border-radius: 15px;
+            background: #fff;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        h3 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.4em;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 15px 25px;
+            margin: 10px 0;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 1em;
+            background: #f8f9fa;
+        }
+
+        .option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-color: var(--secondary);
+        }
+
+        #progress {
+            width: 100%;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        #progressBar {
+            height: 100%;
+            width: 0;
+            background: var(--secondary);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        #result {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(42,84,112,0.2);
+        }
+
+        #whatsappBtn {
+            background: #25D366;
+            color: white;
+            padding: 18px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        #whatsappBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(37,211,102,0.3);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .severity-bar {
+            width: 80%;
+            height: 12px;
+            background: #eee;
+            border-radius: 6px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .severity-indicator {
+            height: 100%;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #25D366, #FF6B6B);
+            transition: width 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="quiz">
+            <div id="progress">
+                <div id="progressBar"></div>
+            </div>
+
+            <!-- Pergunta 1 -->
+            <div class="question active">
+                <h3>📅 Há quanto tempo você percebeu a queda capilar?</h3>
+                <button class="option" onclick="nextQuestion(1)">Menos de 6 meses 🕒</button>
+                <button class="option" onclick="nextQuestion(2)">6 meses a 1 ano 📆</button>
+                <button class="option" onclick="nextQuestion(3)">Mais de 1 ano 📅</button>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="question">
+                <h3>💧 Qual o nível de oleosidade do seu couro cabeludo?</h3>
+                <button class="option" onclick="nextQuestion(1)">Normal/Seco 🌵</button>
+                <button class="option" onclick="nextQuestion(2)">Levemente oleoso 🌊</button>
+                <button class="option" onclick="nextQuestion(3)">Muito oleoso 🔥</button>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="question">
+                <h3>👨🦲 Histórico familiar de calvície?</h3>
+                <button class="option" onclick="nextQuestion(1)">Nenhum parente 🚫</button>
+                <button class="option" onclick="nextQuestion(2)">Alguns parentes 👨👦</button>
+                <button class="option" onclick="nextQuestion(3)">Vários parentes 👨👩👦👦</button>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="question">
+                <h3>🔍 Estado atual dos folículos capilares</h3>
+                <button class="option" onclick="nextQuestion(1)">Ainda bem definidos ✅</button>
+                <button class="option" onclick="nextQuestion(2)">Alguns afinados ⚠️</button>
+                <button class="option" onclick="nextQuestion(3)">Muitos miniaturizados ❌</button>
+            </div>
+
+            <!-- Pergunta 5 -->
+            <div class="question">
+                <h3>💤 Qual a qualidade do seu sono?</h3>
+                <button class="option" onclick="nextQuestion(1)">Ótima 😴</button>
+                <button class="option" onclick="nextQuestion(2)">Regular 🛌</button>
+                <button class="option" onclick="nextQuestion(3)">Ruim 😫</button>
+            </div>
+
+            <!-- Pergunta 6 -->
+            <div class="question">
+                <h3>🧪 Já usou algum tratamento anteriormente?</h3>
+                <button class="option" onclick="nextQuestion(1)">Sim, com sucesso 👍</button>
+                <button class="option" onclick="nextQuestion(2)">Pouco resultado 🤷</button>
+                <button class="option" onclick="nextQuestion(3)">Nenhum resultado 👎</button>
+            </div>
+
+            <!-- Pergunta 7 -->
+            <div class="question">
+                <h3>🧠 Nível de estresse diário?</h3>
+                <button class="option" onclick="nextQuestion(1)">Controlado 🧘</button>
+                <button class="option" onclick="nextQuestion(2)">Moderado 😟</button>
+                <button class="option" onclick="nextQuestion(3)">Muito alto 😫</button>
+            </div>
+        </div>
+
+        <div id="result">
+            <div class="result-card">
+                <h2>🔬 Diagnóstico Completo</h2>
+                <div class="severity-bar">
+                    <div class="severity-indicator" id="severityIndicator"></div>
+                </div>
+                <p id="diagnosisText"></p>
+                <p id="treatmentText"></p>
+            </div>
+            <button id="whatsappBtn">📩 Enviar Relatório ao Doutor Jean</button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        let score = 0;
+        const totalQuestions = 7;
+        const questions = document.querySelectorAll('.question');
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function nextQuestion(value) {
+            score += value;
+            questions[currentQuestion].classList.remove('active');
+            currentQuestion++;
+            
+            if(currentQuestion < totalQuestions) {
+                questions[currentQuestion].classList.add('active');
+                updateProgress();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz').style.display = 'none';
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+
+            let treatment = '';
+            let severity = '';
+            let severityWidth = '33%';
+
+            if(score <= 7) {
+                treatment = "Plano de 3 Meses: Terapia Preventiva";
+                severity = "Leve";
+                severityWidth = '33%';
+            } else if(score <= 14) {
+                treatment = "Plano de 4 Meses: Tratamento Intensivo";
+                severity = "Moderado";
+                severityWidth = '66%';
+            } else {
+                treatment = "Plano de 5 Meses: Protocolo Avançado";
+                severity = "Avançado";
+                severityWidth = '100%';
+            }
+
+            document.getElementById('severityIndicator').style.width = severityWidth;
+            document.getElementById('diagnosisText').innerHTML = `
+                ⚖️ Nível de Severidade: ${severity}<br>
+                📊 Pontuação Total: ${score}/21
+            `;
+            
+            document.getElementById('treatmentText').innerHTML = `
+                💡 Recomendação:<br>
+                <strong>${treatment}</strong><br>
+                ${severity === 'Avançado' ? '⚠️ Necessário acompanhamento especializado imediato' : '✅ Prognóstico positivo com tratamento adequado'}
+            `;
+
+            // Configurar WhatsApp
+            const whatsappBtn = document.getElementById('whatsappBtn');
+            const message = `*Relatório Capilar*%0A%0A🔍 Nível: ${severity}%0A📈 Pontuação: ${score}/21%0A💊 Tratamento: ${treatment}%0A%0A🧑⚕️ Doutor Jean%0A📞 (31) 7510-5402`;
+            
+            whatsappBtn.onclick = () => {
+                window.open(`https://wa.me/553175105402?text=${message}`, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
